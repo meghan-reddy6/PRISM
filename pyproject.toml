@@ -1,0 +1,23 @@
+[project]
+name = "PRISM"
+version = "0.1.0"
+description = "A modern SaaS-style document to Markdown converter using MarkItDown."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "streamlit>=1.35.0",
+    "markitdown[all]>=0.0.1",
+    "python-dotenv>=1.0.1",
+    "werkzeug>=3.0.3"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+managed = true
+
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]

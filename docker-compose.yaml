@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  prism:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: prism_app
+    ports:
+      - "${STREAMLIT_SERVER_PORT:-8501}:8501"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./outputs:/app/outputs
+      - ./.env:/app/.env:ro
+    env_file:
+      - .env
+    restart: unless-stopped

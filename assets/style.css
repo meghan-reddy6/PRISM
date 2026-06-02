@@ -1,0 +1,458 @@
+:root {
+  /* Design tokens - Light theme (default) */
+  --font-sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  --scale-1: 12px;
+  --scale-2: 14px;
+  --scale-3: 16px;
+  --scale-4: 20px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --transition-fast: 150ms ease;
+  --transition-medium: 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Backgrounds & Surfaces */
+  --bg: #ffffff; /* page background */
+  --surface: #ffffff; /* card / surface */
+  --surface-2: #f7f9fb; /* slightly elevated surface */
+  --elev-1: 0 1px 2px rgba(16, 24, 40, 0.04);
+  --elev-2: 0 6px 18px rgba(16, 24, 40, 0.06);
+
+  /* Text */
+  --text-primary: #0b1220; /* ~#111 for strong contrast */
+  --text-secondary: #39434f; /* secondary body text */
+  --text-muted: #6b7280; /* muted text */
+  --text-inverse: #ffffff;
+
+  /* Borders */
+  --border: #e6e9ee;
+  --divider: #e9eef3;
+
+  /* Primary / Action */
+  --primary: #d33b36; /* brand primary (red) */
+  --primary-foreground: #ffffff;
+  --primary-hover: #b82f2b;
+  --primary-active: #992723;
+  --primary-contrast: #ffffff;
+
+  /* Secondary / Neutral */
+  --neutral: #2f3b44;
+  --neutral-foreground: #ffffff;
+  --muted-ghost: #f3f5f7;
+  --muted-border: #d7dbe0;
+
+  /* Status */
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warning: #f59e0b;
+
+  /* Code / Markdown backgrounds */
+  --code-bg: #f5f7fa;
+  --code-fg: #0b1220;
+
+  /* Focus */
+  --focus-ring: 3px rgba(27, 107, 255, 0.15);
+
+  /* Accessibility helpers */
+  --min-touch-target: 40px;
+}
+
+/* Dark theme override */
+[data-theme="dark"] {
+  --bg: #0b1220; /* dark blue-gray, not pure black */
+  --surface: #0f1724; /* card / surface */
+  --surface-2: #111827; /* slightly elevated surface */
+  --elev-1: 0 1px 2px rgba(2, 6, 23, 0.6);
+  --elev-2: 0 8px 24px rgba(2, 6, 23, 0.7);
+
+  --text-primary: #e6eef6; /* soft white for readability */
+  --text-secondary: #c7d2da;
+  --text-muted: #94a3b8;
+  --text-inverse: #0b1220;
+
+  --border: #1f2937;
+  --divider: #172033;
+
+  --primary: #ff6b63; /* slightly brighter in dark mode for contrast */
+  --primary-foreground: #0b1220;
+  --primary-hover: #ff564f;
+  --primary-active: #e04a44;
+  --primary-contrast: #07101a;
+
+  --neutral: #cbd5e1;
+  --neutral-foreground: #0b1220;
+  --muted-ghost: #0b1220;
+  --muted-border: #22303c;
+
+  --success: #34d399;
+  --danger: #ff7b7b;
+  --warning: #fbbf24;
+
+  --code-bg: #07101a;
+  --code-fg: #f8fafc;
+
+  --focus-ring: 3px rgba(255, 107, 99, 0.15);
+}
+
+/* Global base */
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+.stApp {
+  height: 100%;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.stApp {
+  padding: 24px 20px !important;
+}
+
+/* Typography */
+h1,
+.prism-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 6px;
+}
+.prism-subtitle {
+  color: var(--text-secondary);
+  font-size: var(--scale-2);
+  margin: 0 0 12px;
+}
+
+/* Containers & Surfaces */
+.stSidebar {
+  background: linear-gradient(180deg, var(--surface), var(--surface));
+  border-radius: var(--radius-md);
+  padding: 18px !important;
+  box-shadow: var(--elev-1);
+  border: 1px solid var(--divider);
+}
+main,
+.block-container {
+  background: transparent;
+}
+section[data-testid="stAppViewContainer"] {
+  background: transparent;
+}
+
+/* Cards */
+.card,
+.file-info-row,
+.file-info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  box-shadow: var(--elev-1);
+  color: var(--text-primary);
+}
+
+/* File upload dropzone */
+[data-testid="stFileUploadDropzone"] {
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  border: 2px dashed var(--primary);
+  border-radius: calc(var(--radius-lg));
+  padding: 28px;
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+  color: var(--text-primary);
+}
+[data-testid="stFileUploadDropzone"]:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-hover);
+  box-shadow: var(--elev-1);
+}
+[data-testid="stFileUploadDropzone"] p,
+[data-testid="stFileUploadDropzone"] span {
+  color: var(--text-secondary);
+}
+
+/* Buttons - unified system */
+button[kind="primary"],
+.stButton > button,
+.stButton button,
+button[data-baseweb="button"] {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: var(--min-touch-target);
+  min-width: 120px;
+  padding: 0.45rem 1rem !important;
+  border-radius: 10px !important;
+  border: 1px solid transparent !important;
+  background: linear-gradient(180deg, var(--primary), var(--primary-hover));
+  color: var(--primary-foreground) !important;
+  font-weight: 600;
+  font-size: var(--scale-3);
+  cursor: pointer;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    opacity var(--transition-fast);
+  box-shadow: 0 6px 18px rgba(11, 18, 32, 0.06);
+}
+button[kind="primary"]:hover,
+.stButton > button:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(
+    180deg,
+    var(--primary-hover),
+    var(--primary-active)
+  );
+  box-shadow: 0 10px 26px rgba(11, 18, 32, 0.08);
+}
+button[kind="primary"]:active,
+.stButton > button:active {
+  transform: translateY(0);
+  background: linear-gradient(180deg, var(--primary-active), var(--primary));
+  box-shadow: 0 4px 12px rgba(11, 18, 32, 0.06);
+}
+
+/* Disabled states */
+button[disabled],
+button[aria-disabled="true"],
+.stButton > button[disabled] {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  filter: grayscale(20%);
+}
+
+/* Secondary / ghost buttons */
+.button-ghost,
+.stButton.secondary button,
+.stButton--secondary,
+.stButton.secondary > button {
+  background: transparent !important;
+  border: 1px solid var(--muted-border) !important;
+  color: var(--text-primary) !important;
+  padding: 0.45rem 0.9rem !important;
+}
+.button-ghost:hover,
+.stButton.secondary:hover {
+  background: var(--muted-ghost) !important;
+  border-color: var(--border) !important;
+}
+
+/* Download button specific */
+.stDownloadButton > button,
+.stDownloadButton button {
+  display: inline-flex !important;
+  width: 100% !important;
+  padding: 0.45rem 0.9rem !important;
+  border-radius: 10px !important;
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* Ensure primary never blends with background */
+button[kind="primary"],
+.stButton > button {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+[data-theme="dark"] button[kind="primary"],
+[data-theme="dark"] .stButton > button {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Focus states (keyboard accessibility) */
+button:focus-visible,
+.stButton > button:focus-visible,
+.stDownloadButton > button:focus-visible {
+  box-shadow: var(--focus-ring);
+  outline: none !important;
+  border-color: var(--primary);
+}
+
+/* Metrics */
+[data-testid="stMetricValue"] {
+  font-size: 1.5rem !important;
+  color: var(--primary) !important;
+  font-weight: 700;
+}
+.metrics-grid {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin: 12px 0;
+}
+.metric {
+  background: var(--surface);
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--divider);
+  min-width: 100px;
+  text-align: center;
+}
+.metric-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.metric-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* File info row */
+.file-info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+.file-info-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.file-info-meta {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.file-info-time {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Markdown and preview readability */
+.stMarkdown,
+.stMarkdown > div,
+.stText,
+.stExpander,
+div[data-testid="stMarkdownContainer"] * {
+  color: var(--text-primary) !important;
+}
+.stMarkdown pre,
+.stMarkdown code,
+.stCodeBlock,
+pre,
+code {
+  background-color: var(--code-bg) !important;
+  color: var(--code-fg) !important;
+  padding: 0.5rem 0.6rem !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.04) !important;
+  overflow: auto;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+[data-theme="dark"] .stMarkdown pre,
+[data-theme="dark"] .stMarkdown code,
+[data-theme="dark"] pre,
+[data-theme="dark"] code {
+  border: 1px solid rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Tabs and layout */
+[data-testid="stHorizontalBlock"] > div {
+  min-width: 160px;
+}
+.stTabs button,
+.stTabs > div {
+  color: var(--text-primary);
+}
+.stTabs button[aria-selected="true"] {
+  border-bottom: 3px solid var(--primary);
+}
+
+/* Ensure columns & buttons don't clip on small screens */
+.stButton > button,
+.stDownloadButton > button,
+button[data-baseweb="button"] {
+  width: 100% !important;
+  display: block !important;
+  padding: 0.6rem 0.8rem !important;
+  margin: 0.35rem 0 !important;
+  border-radius: 8px !important;
+  z-index: 2 !important;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .stApp {
+    padding: 12px !important;
+  }
+  .stSidebar {
+    padding: 12px !important;
+    border-radius: 8px;
+  }
+  .metrics-grid {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+  .file-info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .stTabs {
+    overflow-x: auto;
+  }
+  .stMarkdown pre,
+  pre {
+    font-size: 0.86rem;
+  }
+}
+
+/* Utility helpers */
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.muted {
+  color: var(--text-muted);
+}
+
+/* Remove duplicate / legacy rules and keep selectors consolidated */
+[data-testid="stFileUploadDropzone"] svg,
+[data-testid="stFileUploadDropzone"] img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure visible separators where needed */
+hr,
+.divider,
+.stDivider {
+  border: none;
+  border-top: 1px solid var(--divider);
+  margin: 18px 0;
+}
+
+/* Final safety overrides to ensure contrast on dynamic elements */
+a,
+a:visited {
+  color: var(--primary);
+  text-decoration: underline;
+}
+input,
+textarea,
+select {
+  color: var(--text-primary);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px;
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* End of theme-aware design system */
