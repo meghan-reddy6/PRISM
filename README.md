@@ -244,16 +244,6 @@ Notes:
 
 ---
 
-## Examples / Screenshots
-
-- The app presents two primary result tabs after conversion:
-  - "Markdown Source" — the raw converted Markdown.
-  - "Rendered Preview" — Streamlit-rendered Markdown preview.
-
-(There are no screenshots included in this repo. You can add images under `assets/` and embed them in this README or the app UI.)
-
----
-
 ## Deployment
 
 Containerized (recommended for production-like setups)
@@ -333,23 +323,25 @@ Identified risks and recommendations (evidence-based)
 
 ## Known Notes
 
-- The CSS asset is `assets/style.css` and is loaded by the app (fixed).
-- No license file found in repository. Add a `LICENSE` file if you plan to publish under an open-source license.
-- No automated tests or CI configured in repository.
+- The CSS asset is `assets/style.css` and is loaded by the app.
+- A `LICENSE` file (MIT) has been added to the repository, enabling open-source usage under defined terms.
+- No automated tests or CI pipeline is currently configured.
 
 ---
 
 ## License
 
-Not found in repo.
+This project is licensed under the MIT License.
 
-- There is no `LICENSE` file detected. If you intend to open-source this project, add a LICENSE (for example MIT, Apache 2.0) to the repository root.
-
----
-
-If you want, I can:
-
-- Add a basic `LICENSE` (MIT) draft and a minimal GitHub Actions CI workflow to run static checks.
-- Add tests or extend conversion error handling.
+- A `LICENSE` file is present in the repository root.
+- The project can be used, modified, and distributed under the terms of the MIT License.
 
 ---
+
+## Next Improvements
+
+- Add automated testing for core conversion logic
+- Introduce CI pipeline for linting and build validation
+- Add authentication layer for secure deployments
+- Improve logging and error monitoring
+- Extend support for plugins and custom converters
